@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Login from "./admin/login";
+import CommentPro from "./commentPro/commentPro";
+import CommentProduct from "./commentProduct/commentProduct";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/loginAdmin">Login Admin</Link>
+              </li>
+              <li>
+                <Link to="/commentPro">Comment Pro</Link>
+              </li>
+              <li>
+                <Link to="/commentProduct">Comment Product</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <Routes>
+            <Route path="/loginAdmin" element={<Login />} />
+            <Route path="/commentPro" element={<CommentPro />} />
+            <Route path="/commentProduct" element={<CommentProduct />} />
+          </Routes>
+        </div>
+      </Router>
   );
 }
 
