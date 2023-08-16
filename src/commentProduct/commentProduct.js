@@ -1,12 +1,119 @@
-// CommentPro.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import './style.css';
 
 function CommentProduct() {
+    const { id } = useParams();
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetchData();
+    }, [id]); // Le hook s'exécutera à chaque changement d'ID
+
+    async function fetchData() {
+        try {
+            const response = await fetch(`http://localhost:8080/orders/idKey/${id}`);
+            const responseData = await response.json();
+
+            setData(responseData);
+
+        } catch (error) {
+            console.error('Une erreur s\'est produite lors de la récupération des données.', error);
+        }
+    }
+
+    const [comments, setComments] = useState({}); // Un objet pour stocker les commentaires et les notes
+
+    const handleCommentChange = (productId, comment) => {
+        setComments((prevComments) => ({
+            ...prevComments,
+            [productId]: { ...prevComments[productId], comment },
+        }));
+    };
+
+    const handleRatingChange = (productId, rating) => {
+        setComments((prevComments) => ({
+            ...prevComments,
+            [productId]: { ...prevComments[productId], rating },
+        }));
+    };
+
+    const submitComments = async () => {
+        if (data && data.idClient) {
+            const idClient = data.idClient;
+
+            const commentsData = Object.keys(comments).map(productId => ({
+                idProduct: parseInt(productId),
+                content: comments[productId]?.comment || '',
+                note: parseInt(comments[productId]?.rating) || 0,
+            }));
+
+            try {
+                const response = await fetch(`http://localhost:8080/comments/create/${idClient}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(commentsData)
+                });
+
+                if (response.status === 201) {
+                    console.log('Commentaires soumis avec succès');
+                } else {
+                    console.error('Erreur lors de la soumission des commentaires');
+                }
+            } catch (error) {
+                console.error('Une erreur s\'est produite lors de la soumission des commentaires.', error);
+            }
+        }
+    };
+
+    const uniqueProducts = {}; // Un objet pour stocker les produits uniques par ID
+
+    if (data) {
+        data.product.forEach((product) => {
+            uniqueProducts[product.id] = product;
+        });
+    }
+
     return (
-        <div>
-            <h1>Comment Product Page</h1>
+        <div className="container">
+            <h1 className="header">Donner votre avis sur nos produits !</h1>
+
+            {data && (
+                <div>
+                    <h3>Produits  :</h3>
+                    <ul className="product-list">
+                        {Object.values(uniqueProducts).map((product) => (
+                            <li key={product.id} className="product-item">
+                                <p className="product-name">Nom : {product.name}</p>
+                                <input
+                                    className="comment-input"
+                                    type="text"
+                                    placeholder="Laissez un commentaire"
+                                    value={comments[product.id]?.comment || ''}
+                                    onChange={(e) => handleCommentChange(product.id, e.target.value)}
+                                />
+                                <input
+                                    className="rating-input"
+                                    type="number"
+                                    min="1"
+                                    max="5"
+                                    placeholder="Note"
+                                    value={comments[product.id]?.rating || ''}
+                                    onChange={(e) => handleRatingChange(product.id, e.target.value)}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                    <button className="submit-button" onClick={submitComments}>Soumettre les commentaires</button>
+
+                </div>
+            )}
         </div>
     );
+
 }
 
 export default CommentProduct;
+
