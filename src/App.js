@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from "./admin/login";
 import CommentPro from "./commentPro/commentPro";
 import CommentProduct from "./commentProduct/commentProduct";
+import Home from "./admin/home/home"
 
 
 function App() {
@@ -11,8 +12,9 @@ function App() {
         <div>
           <Routes>
             <Route path="/loginAdmin" element={<Login />} />
-            <Route path="/commentPro" element={<CommentPro />} />
+            <Route path="/commentPro/:id" element={<CommentPro />} />
             <Route path="/commentProduct/:id" element={<CommentProduct />} />
+              <Route path="/home/:id" element={<Home />} />
           </Routes>
         </div>
       </Router>
