@@ -12,7 +12,7 @@ function CommentProduct() {
 
     async function fetchData() {
         try {
-            const response = await fetch(`http://localhost:8080/orders/idKey/${id}`);
+            const response = await fetch(`https://api-colorblast.current.ovh/orders/idKey/${id}`);
             const responseData = await response.json();
 
             setData(responseData);
@@ -49,7 +49,7 @@ function CommentProduct() {
             }));
 
             try {
-                const response = await fetch(`http://localhost:8080/comments/create/${idClient}`, {
+                const response = await fetch(`https://api-colorblast.current.ovh/comments/create/${idClient}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

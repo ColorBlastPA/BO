@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
-import Clients from "./clients";
-import Professionnels from "./Professionnels";
+import Clients from "./client/clients";
+import Professionnels from "./professionnel/Professionnels";
 import Produits from "./produits";
 import EnAttente from "./enAttente"; // Importez le fichier CSS pour les styles
 

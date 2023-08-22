@@ -9,7 +9,7 @@ function Produits() {
 
     async function fetchData() {
         try {
-            const response = await fetch(`http://localhost:8080/products`);
+            const response = await fetch(`https://api-colorblast.current.ovh/products`);
             const responseData = await response.json();
             setProductData(responseData);
         } catch (error) {

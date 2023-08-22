@@ -15,7 +15,7 @@ function CommentPro() {
 
     async function fetchData() {
         try {
-            const response = await fetch(`http://localhost:8080/professionnel/${id}`);
+            const response = await fetch(`https://api-colorblast.current.ovh/professionnel/${id}`);
             const responseData = await response.json();
             setData(responseData);
         } catch (error) {
@@ -33,7 +33,7 @@ function CommentPro() {
 
     const submitCommentAndRating = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/submit-comment/${id}`, {
+            const response = await fetch(`https://api-colorblast.current.ovh/submit-comment/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
