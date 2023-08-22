@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import "./produit.css"
 
 function Produits() {
     const [productData, setProductData] = useState([]);
@@ -18,20 +20,26 @@ function Produits() {
     }
 
     return (
-        <div>
-            <h1>Professionnels</h1>
-            <ul>
+        <div className="products-container">
+            <h1>Liste des Produits</h1>
+            <ul className="product-list">
                 {productData.map(product => (
-                    <li key={product.id}>
-                        <p>Nom du produit : {product.name}</p>
-
-                        <hr />
+                    <li className="product-item" key={product.id}>
+                        <div className="product-details">
+                            <p>Nom du produit : {product.name}</p>
+                        </div>
+                        <div className="product-actions">
+                            <Link to={`/produits/${product.id}`} className="details-button">
+                                Détails
+                            </Link>
+                        </div>
                     </li>
                 ))}
             </ul>
         </div>
     );
-
 }
+
+
 
 export default Produits;

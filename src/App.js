@@ -6,6 +6,7 @@ import CommentProduct from "./commentProduct/commentProduct";
 import Home from "./admin/home/home"
 import ClientDetails from "./admin/home/client/clientDetails";
 import ProfessionalDetails from "./admin/home/professionnel/ProfessionnelDetails";
+import ProduitDetails from "./admin/home/produit/produitDetails";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
               <Route path="/home/:id" element={<Home />} />
               <Route path="/clients/:id" element={<ClientDetails />} />
               <Route path="/professionnels/:id" element={<ProfessionalDetails />} />
+              <Route path="/produits/:id" element={<ProduitDetails />} />
           </Routes>
         </div>
       </Router>
