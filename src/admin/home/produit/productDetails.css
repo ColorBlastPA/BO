@@ -2,16 +2,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
+    height: 100vh;
 }
 
 .product-details {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-details p {
+    display: flex;
 }
 
 .product-details h1 {
@@ -20,56 +24,53 @@
 }
 
 .product-details p {
-    margin: 8px 0;
     font-size: 16px;
-}
-
-.product-details strong {
-    font-weight: bold;
-}
-
-.product-details-container {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    margin-top: 20px;
-}
-
-.product-details {
-    margin-top: 10px;
+    display: flex;
 }
 
 .alert-message {
     padding: 10px;
-    margin-top: 10px;
+    margin-top: -10px;
     border-radius: 4px;
     font-weight: bold;
+    color: red;
 }
 
 .alert-message.success {
-    background-color: #8BC34A;
-    color: white;
-    border: 1px solid #689F38;
+    color: #8BC34A;
 }
 
-.alert-message.error {
-    background-color: #FF5733;
+.edit-button, .save-button {
     color: white;
-    border: 1px solid #E84C3D;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.edit-button {
+    background-color: #007bff;
 }
 
 .save-button {
     background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
 }
 
-.save-button.disabled {
+.save-button[disabled] {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+input[type="text"], input[type="number"], textarea {
+    padding: 5px;
+    width: 15em;
+    margin: -5px 0 15px auto;
 }

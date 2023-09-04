@@ -24,13 +24,15 @@ function Produits() {
             <h1>Liste des Produits</h1>
             <ul className="product-list">
                 {productData.map(product => (
-                    <li className="product-item" key={product.id}>
-                        <div className="product-details">
+                    <li className="product-details" key={product.id}>
+                        <div className="product-identity">
                             <p>Nom du produit : {product.name}</p>
                         </div>
                         <div className="product-actions">
                             <Link to={`/produits/${product.id}`} className="details-button">
-                                Détails
+                                <span className="material-symbols-outlined">
+                                    more_vert
+                                </span>
                             </Link>
                         </div>
                     </li>

@@ -74,7 +74,9 @@ function ProduitDetails() {
                     <p><strong>Prix :</strong> <input type="number" step="0.01" value={editableData.price || ''} onChange={e => handleFieldChange('price', e.target.value)} /></p>
                     <p><strong>Description :</strong> <textarea value={editableData.description || ''} onChange={e => handleFieldChange('description', e.target.value)} /></p>
                     <p><strong>Catégorie :</strong> <input type="text" value={editableData.category || ''} onChange={e => handleFieldChange('category', e.target.value)} /></p>
-                    <button className={`save-button ${isModified ? '' : 'disabled'}`} onClick={handleSave} disabled={!isModified}>Sauvegarder</button>
+                    <div className="buttons">
+                        <button className={`save-button ${isModified ? '' : 'disabled'}`} onClick={handleSave} disabled={!isModified}>Sauvegarder</button>
+                    </div>
                 </div>
             ) : (
                 <p>Chargement des données...</p>

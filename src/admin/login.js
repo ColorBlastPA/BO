@@ -38,7 +38,7 @@ function Login() {
         <div className="login-container">
             <h1 className="login-header">Partie Administrative</h1>
             <div className="login-form">
-                <div className="input-container">
+                <div className="input-container email-container">
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"
@@ -48,7 +48,7 @@ function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div className="input-container">
+                <div className="input-container password-container">
                     <label htmlFor="password">Mot de passe:</label>
                     <input
                         type="password"
@@ -57,9 +57,11 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button className="login-button" onClick={handleLogin}>
-                    Se connecter
-                </button>
+                <div className="login-button-container">
+                    <button className="login-button" onClick={handleLogin}>
+                        Se connecter
+                    </button>
+                </div>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
             </div>
         </div>
@@ -67,4 +69,3 @@ function Login() {
 }
 
 export default Login;
-

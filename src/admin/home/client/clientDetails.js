@@ -41,7 +41,7 @@ function ClientDetails() {
 
     const handlePasswordChange = async () => {
         try {
-            const response = await fetch(`https://api-colorblast.current.ovh/forgotPassword/${data.mail}`, {
+            const response = await fetch(`https://api-colorblast.current.ovh/forgotPasswordClient/${data.mail}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ function ClientDetails() {
             {alertMessage && <p className={`alert-message ${alertSuccess ? 'success' : ''}`}>{alertMessage}</p>}
             {data ? (
                 <div className="client-details">
-                    <p><strong>Nom/Prénom :</strong> {data.lastname} {data.firstname}</p>
+                    <p><strong>Nom / Prénom :</strong> <span>{data.lastname} {data.firstname}</span></p>
                     <p><strong>Email :</strong> <input type="text" value={editableData.mail || ''} onChange={e => handleFieldChange('mail', e.target.value)} /></p>
                     <p><strong>Pays :</strong> <input type="text" value={editableData.country || ''} onChange={e => handleFieldChange('country', e.target.value)} /></p>
                     <p><strong>Département :</strong> <input type="text" value={editableData.department || ''} onChange={e => handleFieldChange('department', e.target.value)} /></p>
@@ -97,8 +97,10 @@ function ClientDetails() {
                     <p><strong>Ville :</strong> <input type="text" value={editableData.city || ''} onChange={e => handleFieldChange('city', e.target.value)} /></p>
                     <p><strong>Adresse :</strong> <input type="text" value={editableData.address || ''} onChange={e => handleFieldChange('address', e.target.value)} /></p>
                     <p><strong>Admin :</strong> <input type="checkbox" checked={editableData.admin || false} onChange={e => handleFieldChange('admin', e.target.checked)} /></p>
-                    <button className="edit-button" onClick={handlePasswordChange}>Nouveau mot de passe</button>
-                    <button className={`save-button ${isModified  ? '' : 'disabled'}`} onClick={handleSave} disabled={!isModified }>Sauvegarder</button>
+                    <div className="buttons">
+                        <button className="edit-button" onClick={handlePasswordChange}>Nouveau mot de passe</button>
+                        <button className={`save-button ${isModified  ? '' : 'disabled'}`} onClick={handleSave} disabled={!isModified }>Sauvegarder</button>
+                    </div>
                 </div>
             ) : (
                 <p>Chargement des données...</p>

@@ -40,7 +40,7 @@ function ProfessionalDetails() {
 
     const handlePasswordChange = async () => {
         try {
-            const response = await fetch(`https://api-colorblast.current.ovh/forgotPassword/${data.mail}`, {
+            const response = await fetch(`https://api-colorblast.current.ovh/forgotPasswordPro/${data.mail}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,8 +91,8 @@ function ProfessionalDetails() {
             <p className={`alert-message ${alertSuccess ? 'success' : 'error'}`}>{alertMessage}</p>
             {data ? (
                 <div className="professional-details">
-                    <p><strong>Nom/Prénom :</strong> {data.lastname} {data.firstname}</p>
-                    <p><strong>Email :</strong> {data.mail}</p>
+                    <p><strong>Nom/Prénom :</strong> <span>{data.lastname} {data.firstname}</span></p>
+                    <p><strong>Email :</strong> <span>{data.mail}</span></p>
                     <p><strong>Pays :</strong> <input type="text" value={editableData.country || ''} onChange={e => handleFieldChange('country', e.target.value)} /></p>
                     <p><strong>Département :</strong> <input type="text" value={editableData.department || ''} onChange={e => handleFieldChange('department', e.target.value)} /></p>
                     <p><strong>Code Postal :</strong> <input type="text" value={editableData.postal_code || ''} onChange={e => handleFieldChange('postal_code', e.target.value)} /></p>
@@ -102,8 +102,10 @@ function ProfessionalDetails() {
                     <p><strong>Téléphone :</strong> <input type="text" value={editableData.phone || ''} onChange={e => handleFieldChange('phone', e.target.value)} /></p>
                     <p><strong>Note :</strong> <input type="number" min="0" max="5" value={editableData.note || ''} onChange={e => handleFieldChange('note', e.target.value)} /></p>
                     <p><strong>Description :</strong> <textarea value={editableData.description || ''} onChange={e => handleFieldChange('description', e.target.value)} /></p>
-                    <button className="edit-button" onClick={handlePasswordChange}>Nouveau mot de passe</button>
-                    <button className={`save-button ${isModified  ? '' : 'disabled'}`} onClick={handleSave} disabled={!isModified}>Sauvegarder</button>
+                    <div className="buttons">
+                        <button className="edit-button" onClick={handlePasswordChange}>Nouveau mot de passe</button>
+                        <button className={`save-button ${isModified  ? '' : 'disabled'}`} onClick={handleSave} disabled={!isModified}>Sauvegarder</button>
+                    </div>
                 </div>
             ) : (
                 <p>Chargement des données...</p>

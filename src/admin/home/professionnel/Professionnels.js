@@ -24,14 +24,16 @@ function Professionnels() {
             <h1>Professionnels</h1>
             <ul className="professional-list">
                 {proData.map(pro => (
-                    <li className="professional-item" key={pro.id}>
-                        <div className="professionnel-details">
-                            <p>Nom/Prénom : {pro.lastname} {pro.firstname}</p>
+                    <li className="professional-details" key={pro.id}>
+                        <div className="professional-identity">
+                            <p>Nom / Prénom : {pro.lastname} {pro.firstname}</p>
                             <p>Email : {pro.mail}</p>
                         </div>
                         <div className="professional-actions">
                             <Link to={`/professionnels/${pro.id}`} className="details-button">
-                                Détails
+                                <span className="material-symbols-outlined">
+                                    more_vert
+                                </span>
                             </Link>
                         </div>
                     </li>

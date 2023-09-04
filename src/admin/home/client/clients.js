@@ -24,14 +24,16 @@ function Clients() {
             <h1>Liste des Clients</h1>
             <ul className="client-list">
                 {clientData.map(client => (
-                    <li className="client-item" key={client.id}>
-                        <div className="client-details">
-                            <p>Nom/Prénom : {client.lastname} {client.firstname}</p>
+                    <li className="client-details" key={client.id}>
+                        <div className="client-identity">
+                            <p>Nom / Prénom : {client.lastname} {client.firstname}</p>
                             <p>Email : {client.mail}</p>
                         </div>
                         <div className="client-actions">
                             <Link to={`/clients/${client.id}`} className="details-button">
-                                Détails
+                                <span className="material-symbols-outlined">
+                                    more_vert
+                                </span>
                             </Link>
                         </div>
                     </li>

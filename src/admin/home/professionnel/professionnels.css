@@ -1,42 +1,46 @@
 .professionals-container {
     text-align: center;
     margin-top: 20px;
+    display: block;
+}
+
+.professionals-container h1 {
+    padding-top: -5px;
 }
 
 .professional-list {
     list-style: none;
     padding: 0;
-}
-
-.professional-item {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px 0;
-    display: flex;
+    width: fit-content;
+    display: grid;
+    gap: 35px;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: start;
     align-items: center;
-    justify-content: space-between;
 }
 
-.professionnel-details {
-    flex: 1;
+.professional-details {
     text-align: left;
+    height: fit-content;
+    width: 400px;
 }
 
-.professional-actions {
-    flex: 0;
+.professional-identity {
+    display: grid;
+    float: left;
 }
 
 .details-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-decoration: none;
+    color: black;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    float: right;
+    justify-content: center;
 }
 
-.details-button:hover {
-    background-color: #0056b3;
+.professional-actions span {
+    float: right;
+    width: fit-content;
+    display: flex;
 }

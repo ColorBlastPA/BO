@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     background-color: #333;
-    padding: 10px;
+    height: 50px;
 }
 
 .navbar button {
@@ -12,10 +12,12 @@
     cursor: pointer;
     padding: 10px;
     font-size: 16px;
+    width: 250px;
 }
 
 .navbar button.active {
     background-color: #555;
+    border-radius: 15px;
 }
 
 .tab-content {
