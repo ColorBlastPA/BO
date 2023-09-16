@@ -22,17 +22,20 @@ function Produits() {
     return (
         <div className="products-container">
             <h1>Liste des Produits</h1>
+            <div className="button-container">
+                <Link to="/addProduct" className="add-product-button">
+                    Ajouter un produit
+                </Link>
+            </div>
             <ul className="product-list">
-                {productData.map(product => (
+                {productData.map((product) => (
                     <li className="product-details" key={product.id}>
                         <div className="product-identity">
                             <p>Nom du produit : {product.name}</p>
                         </div>
                         <div className="product-actions">
                             <Link to={`/produits/${product.id}`} className="details-button">
-                                <span className="material-symbols-outlined">
-                                    more_vert
-                                </span>
+                                <span className="material-symbols-outlined">more_vert</span>
                             </Link>
                         </div>
                     </li>

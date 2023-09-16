@@ -1,0 +1,66 @@
+/* Styles pour le conteneur principal */
+.add-product-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Styles pour le titre */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Styles pour les éléments du formulaire */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+/* Styles pour le bouton */
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour le message de confirmation */
+.confirmation-message {
+    margin-top: 10px;
+    font-size: 18px;
+    color: green;
+}
+
+/* Styles pour les messages d'erreur */
+.error-message {
+    margin-top: 10px;
+    font-size: 18px;
+    color: red;
+}

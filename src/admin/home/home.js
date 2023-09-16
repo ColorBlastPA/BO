@@ -3,7 +3,7 @@ import './style.css';
 import Clients from "./client/clients";
 import Professionnels from "./professionnel/Professionnels";
 import Produits from "./produit/produits";
-import EnAttente from "./enAttente"; // Importez le fichier CSS pour les styles
+import EnAttente from "./waiting/waitingList"; // Importez le fichier CSS pour les styles
 
 function Home() {
     const [activeTab, setActiveTab] = useState('Clients');

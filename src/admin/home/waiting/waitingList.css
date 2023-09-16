@@ -1,0 +1,46 @@
+.professionals-container {
+    text-align: center;
+    margin-top: 20px;
+    display: block;
+}
+
+.professionals-container h1 {
+    padding-top: -5px;
+}
+
+.professional-list {
+    list-style: none;
+    padding: 0;
+    width: fit-content;
+    display: grid;
+    gap: 35px;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: start;
+    align-items: center;
+}
+
+.professional-details {
+    text-align: left;
+    height: fit-content;
+    width: 400px;
+}
+
+.professional-identity {
+    display: grid;
+    float: left;
+}
+
+.details-button {
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    float: right;
+    justify-content: center;
+}
+
+.professional-actions span {
+    float: right;
+    width: fit-content;
+    display: flex;
+}

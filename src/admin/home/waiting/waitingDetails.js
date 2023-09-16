@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import "./professionalDetails.css"
+import "./waitingDetails.css"
 
-function ProfessionalDetails() {
+function WaitingDetails() {
     const { id } = useParams();
     const [data, setData] = useState(null);
     const [editableData, setEditableData] = useState({});
@@ -113,4 +113,4 @@ function ProfessionalDetails() {
     );
 }
 
-export default ProfessionalDetails;
+export default WaitingDetails;
