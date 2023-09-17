@@ -5,8 +5,6 @@ import "./waitingDetails.css"
 function WaitingDetails() {
     const { id } = useParams();
     const [data, setData] = useState(null);
-    const [editableData, setEditableData] = useState({});
-    const [isModified, setIsModified] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertSuccess, setAlertSuccess] = useState(false);
 
@@ -14,76 +12,62 @@ function WaitingDetails() {
         fetchData();
     }, [id]);
 
-    useEffect(() => {
-        if (data) {
-            setEditableData(data);
-        }
-    }, [data]);
-
     async function fetchData() {
         try {
-            const response = await fetch(`https://api-colorblast.current.ovh/professionnel/${id}`);
+            const response = await fetch(`https://api-colorblast.current.ovh/professionnel/certif/${id}`);
             const responseData = await response.json();
+            console.log(responseData);
             setData(responseData);
         } catch (error) {
             console.error('Une erreur s\'est produite lors de la récupération des données.', error);
         }
     }
 
-    const handleFieldChange = (fieldName, value) => {
-        setEditableData(prevData => ({
-            ...prevData,
-            [fieldName]: value,
-        }));
-        setIsModified(true);
-    };
-
-    const handlePasswordChange = async () => {
+    async function handleValidateClick() {
         try {
-            const response = await fetch(`https://api-colorblast.current.ovh/forgotPasswordPro/${data.mail}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                setAlertMessage('Le mot de passe a été changé avec succès');
-                setAlertSuccess(true);
-            } else {
-                setAlertMessage('Erreur lors du changement de mot de passe');
-                setAlertSuccess(false);
-            }
-        } catch (error) {
-            setAlertMessage('Une erreur s\'est produite lors du changement de mot de passe.');
-            setAlertSuccess(false);
-        }
-        //setIsModified(true);
-    };
-
-    const handleSave = async () => {
-        try {
+            const updatedData = { ...data.pro, waiting: false };
             const response = await fetch(`https://api-colorblast.current.ovh/professionnel`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(editableData),
+                body: JSON.stringify(updatedData),
             });
 
             if (response.ok) {
-                setIsModified(false);
-                setAlertMessage('Les données ont été mises à jour avec succès');
+                setAlertMessage('Le professionnel a été validé avec succès.');
                 setAlertSuccess(true);
+                // Vous pouvez mettre à jour d'autres états ou effectuer d'autres actions ici si nécessaire.
             } else {
-                setAlertMessage('Erreur lors de la mise à jour des données');
+                setAlertMessage('Erreur lors de la validation du professionnel.');
                 setAlertSuccess(false);
             }
         } catch (error) {
-            setAlertMessage('Une erreur s\'est produite lors de la sauvegarde des données.');
+            console.error('Une erreur s\'est produite lors de la validation du professionnel.', error);
+            setAlertMessage('Une erreur s\'est produite lors de la validation du professionnel.');
             setAlertSuccess(false);
         }
-    };
+    }
+
+    async function handleRefuseClick() {
+        try {
+            const response = await fetch(`https://api-colorblast.current.ovh/professionnel/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                setAlertMessage('Le professionnel a été refusé avec succès.');
+                setAlertSuccess(true);
+            } else {
+                setAlertMessage('Erreur lors du refus du professionnel.');
+                setAlertSuccess(false);
+            }
+        } catch (error) {
+            console.error('Une erreur s\'est produite lors du refus du professionnel.', error);
+            setAlertMessage('Une erreur s\'est produite lors du refus du professionnel.');
+            setAlertSuccess(false);
+        }
+    }
 
     return (
         <div className="professional-details-container">
@@ -91,19 +75,29 @@ function WaitingDetails() {
             <p className={`alert-message ${alertSuccess ? 'success' : 'error'}`}>{alertMessage}</p>
             {data ? (
                 <div className="professional-details">
-                    <p><strong>Nom/Prénom :</strong> <span>{data.lastname} {data.firstname}</span></p>
-                    <p><strong>Email :</strong> <span>{data.mail}</span></p>
-                    <p><strong>Pays :</strong> <input type="text" value={editableData.country || ''} onChange={e => handleFieldChange('country', e.target.value)} /></p>
-                    <p><strong>Département :</strong> <input type="text" value={editableData.department || ''} onChange={e => handleFieldChange('department', e.target.value)} /></p>
-                    <p><strong>Code Postal :</strong> <input type="text" value={editableData.postal_code || ''} onChange={e => handleFieldChange('postal_code', e.target.value)} /></p>
-                    <p><strong>Ville :</strong> <input type="text" value={editableData.city || ''} onChange={e => handleFieldChange('city', e.target.value)} /></p>
-                    <p><strong>Nom de l'entreprise :</strong> <input type="text" value={editableData.company_name || ''} onChange={e => handleFieldChange('company_name', e.target.value)} /></p>
-                    <p><strong>Prix :</strong> <input type="number" step="0.01" value={editableData.price || ''} onChange={e => handleFieldChange('price', e.target.value)} /></p>
-                    <p><strong>Téléphone :</strong> <input type="text" value={editableData.phone || ''} onChange={e => handleFieldChange('phone', e.target.value)} /></p>
-                    <p><strong>Description :</strong> <textarea value={editableData.description || ''} onChange={e => handleFieldChange('description', e.target.value)} /></p>
+                    <p><strong>Nom/Prénom :</strong> <span>{data.pro.lastname} {data.pro.firstname}</span></p>
+                    <p><strong>Email :</strong> <span>{data.pro.mail}</span></p>
+                    <p><strong>Pays :</strong> <span>{data.pro.country}</span></p>
+                    <p><strong>Département :</strong> <span>{data.pro.department}</span></p>
+                    <p><strong>Code Postal :</strong> <span>{data.pro.postal_code}</span></p>
+                    <p><strong>Ville :</strong> <span>{data.pro.city}</span></p>
+                    <p><strong>Nom de l'entreprise :</strong> <span>{data.pro.company_name}</span></p>
+                    <p><strong>Prix :</strong> <span>{data.pro.price}</span></p>
+                    <p><strong>Téléphone :</strong> <span>{data.pro.phone}</span></p>
+                    <p><strong>Description :</strong> <span>{data.pro.description}</span></p>
+
+                    {/* Afficher le lien PDF avec le nom de fichier */}
+                    <div className="pdf-link">
+                        <strong>Certificat :
+                            <a href={data.certificate.url} target="_blank" rel="noopener noreferrer">
+                                <p>{data.certificate.filename}</p>
+                            </a>
+                        </strong>
+                    </div>
+
                     <div className="buttons">
-                        <button className="edit-button" onClick={handlePasswordChange}>Nouveau mot de passe</button>
-                        <button className={`save-button ${isModified  ? '' : 'disabled'}`} onClick={handleSave} disabled={!isModified}>Sauvegarder</button>
+                        <button onClick={handleRefuseClick}>Refuser</button>
+                        <button onClick={handleValidateClick}>Valider</button>
                     </div>
                 </div>
             ) : (
