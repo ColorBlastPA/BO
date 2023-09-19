@@ -8,7 +8,7 @@ function CommentProduct() {
 
     useEffect(() => {
         fetchData();
-    }, [id]); // Le hook s'exécutera à chaque changement d'ID
+    }, [id]);
 
     async function fetchData() {
         try {
@@ -22,7 +22,7 @@ function CommentProduct() {
         }
     }
 
-    const [comments, setComments] = useState({}); // Un objet pour stocker les commentaires et les notes
+    const [comments, setComments] = useState({});
 
     const handleCommentChange = (productId, comment) => {
         setComments((prevComments) => ({
