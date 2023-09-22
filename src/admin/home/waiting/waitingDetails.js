@@ -96,9 +96,14 @@ function WaitingDetails() {
                     </div>
 
                     <div className="buttons">
-                        <button onClick={handleRefuseClick}>Refuser</button>
-                        <button onClick={handleValidateClick}>Valider</button>
+                        <button className="action-button refuse" onClick={handleRefuseClick}>
+                            Refuser
+                        </button>
+                        <button className="action-button validate" onClick={handleValidateClick}>
+                            Valider
+                        </button>
                     </div>
+
                 </div>
             ) : (
                 <p>Chargement des données...</p>

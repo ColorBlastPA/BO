@@ -1,4 +1,4 @@
-.container {
+.container-product {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -25,21 +25,9 @@
     margin-bottom: 10px;
 }
 
-.comment-input {
-    width: 90%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
 
-.rating-input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
 
-.submit-button {
+.submit-product-button {
     background-color: #007bff;
     color: white;
     border: none;

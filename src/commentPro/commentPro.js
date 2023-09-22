@@ -4,18 +4,18 @@ import { useParams } from 'react-router-dom';
 import './style.css';
 
 function CommentPro() {
-    const { id } = useParams();
+    const { idPro, idClient } = useParams();
     const [data, setData] = useState(null);
     const [comments, setComments] = useState('');
     const [rating, setRating] = useState('');
 
     useEffect(() => {
         fetchData();
-    }, [id]);
+    }, [idPro]);
 
     async function fetchData() {
         try {
-            const response = await fetch(`https://api-colorblast.current.ovh/professionnel/${id}`);
+            const response = await fetch(`https://api-colorblast.current.ovh/professionnel/${idPro}`);
             const responseData = await response.json();
             setData(responseData);
         } catch (error) {
@@ -34,22 +34,23 @@ function CommentPro() {
 
     const submitCommentAndRating = async () => {
         try {
-            const response = await fetch(`https://api-colorblast.current.ovh/submit-comment/${id}`, {
+            const response = await fetch(`https://api-colorblast.current.ovh/comments/createPro/${idClient}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    comment: comments,
-                    rating: rating,
+                    idPro: parseInt(idPro),
+                    content: comments,
+                    note: parseInt(rating),
                 }),
             });
 
             if (response.ok) {
                 console.log('Commentaire et note soumis avec succès');
-                // Réinitialisez les champs de commentaires et de notes ici si nécessaire
                 setComments('');
                 setRating('');
+                window.location.href = `/thanksPage`;
             } else {
                 console.error('Erreur lors de la soumission du commentaire et de la note');
             }
@@ -57,6 +58,7 @@ function CommentPro() {
             console.error('Erreur lors de la soumission du commentaire et de la note', error);
         }
     };
+
 
     return (
         <div className="comment-pro-container">
@@ -87,10 +89,11 @@ function CommentPro() {
                             value={rating}
                             onChange={handleRatingChange}
                         />
-                        <button className="submit-button" onClick={submitCommentAndRating}>
-                            Soumettre le commentaire et la note
-                        </button>
+
                     </div>
+                    <button className="submit-button" onClick={submitCommentAndRating}>
+                        Soumettre le commentaire et la note
+                    </button>
                 </div>
             )}
         </div>

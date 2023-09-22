@@ -24,7 +24,7 @@ function Produits() {
             <h1>Liste des Produits</h1>
             <div className="button-container">
                 <Link to="/addProduct" className="add-product-button">
-                    Ajouter un produit
+                    <span className="plus-symbol">+</span>
                 </Link>
             </div>
             <ul className="product-list">

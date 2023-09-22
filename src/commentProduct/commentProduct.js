@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './style.css';
+import './commentProduct.css';
 
 function CommentProduct() {
     const { id } = useParams();
@@ -48,6 +48,7 @@ function CommentProduct() {
                 note: parseInt(comments[productId]?.rating) || 0,
             }));
 
+
             try {
                 const response = await fetch(`https://api-colorblast.current.ovh/comments/create/${idClient}`, {
                     method: 'POST',
@@ -59,6 +60,7 @@ function CommentProduct() {
 
                 if (response.status === 201) {
                     console.log('Commentaires soumis avec succès');
+                    window.location.href = `/thanksPage`;
                 } else {
                     console.error('Erreur lors de la soumission des commentaires');
                 }
@@ -77,7 +79,7 @@ function CommentProduct() {
     }
 
     return (
-        <div className="container">
+        <div className="container-product">
             <h1 className="header">Donner votre avis sur nos produits !</h1>
 
             {data && (
@@ -88,15 +90,16 @@ function CommentProduct() {
                             <li key={product.id} className="product-item">
                                 <p className="product-name">Nom : {product.name}</p>
                                 <input
-                                    className="comment-input"
                                     type="text"
+                                    className="comment-product-input"
                                     placeholder="Laissez un commentaire"
                                     value={comments[product.id]?.comment || ''}
                                     onChange={(e) => handleCommentChange(product.id, e.target.value)}
                                 />
+
                                 <input
-                                    className="rating-input"
                                     type="number"
+                                    className="rating-product-input"
                                     min="1"
                                     max="5"
                                     placeholder="Note"
@@ -106,7 +109,7 @@ function CommentProduct() {
                             </li>
                         ))}
                     </ul>
-                    <button className="submit-button" onClick={submitComments}>Soumettre les commentaires</button>
+                    <button className="submit-product-button" onClick={submitComments}>Soumettre les commentaires</button>
 
                 </div>
             )}
