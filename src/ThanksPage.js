@@ -12,7 +12,7 @@ function ThanksPage() {
 
     return (
         <div className="thanks-container">
-            <img src="/launcher_icon.png" alt="Image de remerciement" className="thanks-image" />
+            <img src="https://minio.erzalauren.fr/colorblast/launcher_icon.png" alt="Image de remerciement" className="thanks-image" />
             <h1 className="thanks-header">Merci pour vos commentaires</h1>
             <p className="thanks-message">À bientôt sur l'application ColorBlast.</p>
         </div>
